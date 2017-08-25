@@ -8,6 +8,7 @@ dependencies:
   - link
   - node
   - text
+  - stanford_news
   - ui_patterns_views
   - user
   - views
