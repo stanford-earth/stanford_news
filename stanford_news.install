@@ -15,3 +15,14 @@ function stanford_news_update_8101() {
     $field->delete();
   }
 }
+
+/**
+ * Install new dependencies.
+ */
+function stanford_news_update_8102() {
+  \Drupal::service('module_installer')->install([
+    'stanford_paragraph_section_highlight_cards',
+    'stanford_paragraph_responsive_image',
+    'stanford_paragraph_video',
+  ]);
+}
