@@ -7,6 +7,7 @@ dependencies:
   - datetime
   - entity_reference_revisions
   - field
+  - field_group
   - file
   - filefield_paths
   - image
