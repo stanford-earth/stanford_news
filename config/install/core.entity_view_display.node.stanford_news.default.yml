@@ -170,7 +170,7 @@ third_party_settings:
               third_party_settings: {  }
               weight: 0
             region: first
-            weight: -1
+            weight: -2
             uuid: 7886da27-3df0-439f-9a56-a0d8e14723e6
             context_mapping:
               entity: '@panelizer.entity_context:entity'
