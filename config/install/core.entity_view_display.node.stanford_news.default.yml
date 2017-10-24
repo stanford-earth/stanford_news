@@ -140,15 +140,6 @@ third_party_settings:
             uuid: 12c3a181-8d77-4eac-b445-8d40e2b380c2
             context_mapping:
               entity: '@panelizer.entity_context:entity'
-          44ace210-2576-4c92-8a88-d15c45e55b5a:
-            id: stanford_layouts_node_title
-            label: 'Node Title for Panels'
-            provider: stanford_layouts
-            label_display: '0'
-            region: first
-            weight: -4
-            uuid: 44ace210-2576-4c92-8a88-d15c45e55b5a
-            context_mapping: {  }
           9a26e52b-3242-4405-9825-ebe363ec591a:
             id: 'entity_field:node:field_s_news_sub_title'
             label: 'Sub Title'
@@ -215,6 +206,23 @@ third_party_settings:
             region: full
             weight: -4
             uuid: 22657b6d-2a49-4cc7-8c50-f65c347a4121
+            context_mapping:
+              entity: '@panelizer.entity_context:entity'
+          5f03f074-a8da-4f35-8bbe-30ca6c828cdd:
+            id: 'entity_field:node:title'
+            label: Title
+            provider: ctools_block
+            label_display: '0'
+            formatter:
+              label: hidden
+              type: string
+              settings:
+                link_to_entity: false
+              third_party_settings: {  }
+              weight: 0
+            region: first
+            weight: -5
+            uuid: 5f03f074-a8da-4f35-8bbe-30ca6c828cdd
             context_mapping:
               entity: '@panelizer.entity_context:entity'
         id: panels_variant
