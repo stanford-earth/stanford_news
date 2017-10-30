@@ -1,4 +1,6 @@
 name: 'Stanford News Earth Matters'
+version: 8.x-1.0-alpha1
+package: Stanford
 type: module
 core: 8.x
 dependencies:
