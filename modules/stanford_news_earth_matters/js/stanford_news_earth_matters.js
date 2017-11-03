@@ -1,8 +1,9 @@
 (function ($) {
 
   /**
-   * Set active class on Views AJAX filter
-   * on selected category
+   * Set active class on Views AJAX filter.
+   *
+   * On selected category.
    */
   Drupal.behaviors.EarthMatters = {
     attach: function (context, settings) {
@@ -13,28 +14,31 @@
        * Set the view filter value in the select.
        */
       function setFilter(value, filter) {
-        if ($(filter).attr('multiple')) {
-          var existingValues = $(filter).val();
 
-          if (existingValues) {
-            var i = existingValues.indexOf(value);
+        // Uncomment the below to re-enable the multiple filter functionality.
 
-            if (i !== -1) {
-              delete existingValues[i];
-            }
-            else {
-              existingValues.push(value);
-            }
-            value = existingValues;
-          }
-          else {
-            value = [value];
-          }
-
-          if (value.length) {
-            value = cleanArray(value);
-          }
-        }
+        // if ($(filter).attr('multiple')) {
+        //   var existingValues = $(filter).val();
+        //
+        //   if (existingValues) {
+        //     var i = existingValues.indexOf(value);
+        //
+        //     if (i !== -1) {
+        //       delete existingValues[i];
+        //     }
+        //     else {
+        //       existingValues.push(value);
+        //     }
+        //     value = existingValues;
+        //   }
+        //   else {
+        //     value = [value];
+        //   }
+        //
+        //   if (value.length) {
+        //     value = cleanArray(value);
+        //   }
+        // }
 
         filter.val(value);
         $(filter).trigger('change');
@@ -101,9 +105,7 @@
             tid = $(this).attr('rel');
           }
           var filter = $(view).find('select');
-
           setPushState($(this).text());
-
 
           setFilter(tid, filter);
         }).addClass('filterClickProcessed');
@@ -113,21 +115,35 @@
        * Push the new url with new filters to the browser.
        */
       function setPushState(string) {
-        var current_path = window.location.pathname;
+
+        // Uncomment the below to re-enable the multiple filter functionality.
+
+        // var current_path = window.location.pathname;
+        // string = cleanString(string);
+        // if (current_path.indexOf(string) == -1) {
+        //   current_path = current_path + '/' + string;
+        // }
+        // else {
+        //   current_path = current_path.replace('/' + string, '');
+        // }
+        //
+        // history.pushState(null, null, current_path + window.location.search + window.location.hash);
+
         string = cleanString(string);
-        if (current_path.indexOf(string) == -1) {
-          current_path = current_path + '/' + string;
+        if (string !== "all") {
+          var current_path = "/earth-matters/" + string;
         }
         else {
-          current_path = current_path.replace('/' + string, '');
+          var current_path = "/earth-matters";
         }
-
         history.pushState(null, null, current_path + window.location.search + window.location.hash);
       }
 
+      // Creates the click event on each item in order to filter by group.
       $(view).find('a.filter-tab, .masonry-block__tags .tag-item').each(function () {
         setFilterClick(this, view);
       });
+
     },
 
     /**
@@ -141,13 +157,14 @@
             $('a[rel="' + value + '"]').addClass('active');
           })
         }
+        else {
+          $('a[data-tid="0"]').parent().addClass('active');
+        }
       });
     }
   };
 
-
   $(document).ajaxComplete(Drupal.behaviors.EarthMatters.setActives);
   Drupal.behaviors.EarthMatters.setActives();
-
 
 })(jQuery);
