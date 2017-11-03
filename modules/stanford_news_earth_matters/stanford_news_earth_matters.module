@@ -85,8 +85,9 @@ function _stanford_news_earth_matters_build_menu(array $terms, array $tids = [])
   $term_links = [];
 
   // Seed the menu with an "all" option.
-  $all_options = [];
-
+  $all_options = [
+    'attributes' => ['class' => ['filter-tab'], 'data-tid' => "0"],
+  ];
   if (empty($tids[0])) {
     $all_options['attributes']['class'][] = 'active';
   }

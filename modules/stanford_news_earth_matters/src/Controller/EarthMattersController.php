@@ -93,7 +93,9 @@ class EarthMattersController extends ControllerBase implements ContainerInjectio
     $terms = [];
     /** @var \Drupal\taxonomy\Entity\Term $term */
     foreach ($this->routeMatch->getParameters()->all() as $term) {
-      $terms[] = $term->id();
+      if (is_object($term)) {
+        $terms[] = $term->id();
+      }
     }
     $view = $this->getView(implode('+', $terms));
 
