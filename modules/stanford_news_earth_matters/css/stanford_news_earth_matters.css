@@ -36,6 +36,11 @@
   color: #fff;
 }
 
+.section-earth-matters .nav-item.active:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
 .section-earth-matters ul.pager {
   background: #dad7cb;
   padding: 0;

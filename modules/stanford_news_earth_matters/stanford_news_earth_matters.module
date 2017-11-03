@@ -83,9 +83,24 @@ function stanford_news_earth_matters_form_views_exposed_form_alter(&$form, FormS
  */
 function _stanford_news_earth_matters_build_menu(array $terms, array $tids = []) {
   $term_links = [];
+
+  // Seed the menu with an "all" option.
+  $all_options = [];
+
+  if (empty($tids[0])) {
+    $all_options['attributes']['class'][] = 'active';
+  }
+
+  $term_links[] = [
+    'name' => "All",
+    'link' => Link::fromTextAndUrl(t("All"), Url::fromUri("internal:/earth-matters", $all_options))->toString(),
+  ];
+
+  // Then iterate through the rest.
   foreach ($terms as $tid => $term_name) {
 
-    $path_params = ['term1' => _stanford_news_earth_matters_clean_name($term_name)];
+    $clean_name = _stanford_news_earth_matters_clean_name($term_name);
+    $path_params = ['term1' => $clean_name];
     $options = [
       'attributes' => ['class' => ['filter-tab'], 'data-tid' => $tid],
     ];
@@ -94,7 +109,8 @@ function _stanford_news_earth_matters_build_menu(array $terms, array $tids = [])
       $options['attributes']['class'][] = 'active';
     }
 
-    $url = Url::fromRoute('stanford_news_earth_matters.1_terms', $path_params, $options);
+    // $url = Url::fromRoute('stanford_news_earth_matters.1_terms', $path_params, $options);
+    $url = Url::fromUri("internal:/earth-matters/" . $clean_name, $options);
 
     $term_links[] = [
       'name' => $term_name,
