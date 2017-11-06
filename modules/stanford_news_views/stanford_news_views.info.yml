@@ -13,5 +13,5 @@ dependencies:
   - ui_patterns_views
   - user
   - views
-version: 8.x-1.0-alpha2
+version: 8.x-1.0-dev
 package: Stanford
