@@ -576,7 +576,7 @@ display:
           specify_validation: true
           validate:
             type: 'entity:taxonomy_term'
-            fail: 'access denied'
+            fail: 'not found'
           validate_options:
             bundles:
               news_categories: news_categories
