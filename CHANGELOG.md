@@ -1,5 +1,19 @@
 # Stanford News
 
+8.x-1.0-alpha4
+--------------------------------------------------------------------------------
+_Release Date: 2017-11-09_
+
+- Neglected to add appropriate versioning and tagging on release of alpha3
+
+
+8.x-1.0-alpha3
+--------------------------------------------------------------------------------
+_Release Date: 2017-11-09_
+
+- Fix contextual filter on view to return not-found instead of not-allowed.
+
+
 8.x-1.0-alpha2
 --------------------------------------------------------------------------------  
 _Release Date: 2017-11-06_
