@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_s_news_department
+    - node.type.stanford_news
+    - taxonomy.vocabulary.department_program
+id: node.stanford_news.field_s_news_department
+field_name: field_s_news_department
+entity_type: node
+bundle: stanford_news
+label: Department
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      department_program: department_program
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
