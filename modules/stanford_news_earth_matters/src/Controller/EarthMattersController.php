@@ -82,7 +82,7 @@ class EarthMattersController extends ControllerBase implements ContainerInjectio
 
       // Force a few variant settings as the block isn't fully flushed out.
       $variant_settings = &$block_content['#ds_configuration']['layout']['settings']['pattern']['variants'];
-      $variant_settings['is_tall']['constant_value'] = 'is-short';
+      $variant_settings['is_tall']['constant_value'] = 'is-tall';
       $variant_settings['is_page_title']['constant_value'] = 0;
       $variant_settings['header_position']['constant_value'] = 'not-centered';
 
