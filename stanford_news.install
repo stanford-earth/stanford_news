@@ -52,7 +52,7 @@ function stanford_news_update_8103() {
 /**
  * Change the subhead and intro fields in to one field with summary.
  */
-function stanford_news_update_8204() {
+function stanford_news_update_8104() {
 
   $database = \Drupal::database();
 
@@ -61,6 +61,15 @@ function stanford_news_update_8204() {
   $subtitle_field_name = "field_s_news_sub_title";
   $teaser_field_name = "field_s_news_teaser";
   $summary_field_name = "field_s_news_summary";
+  $entity_type = "node";
+  $bundle = "stanford_news";
+
+  // Save the new field to the db.
+  $field = \Drupal::configFactory()->getEditable('field.field.node.stanford_news.field_s_news_teaser');
+  $field->save();
+  
+  $storage = \Drupal::configFactory()->getEditable('field.storage.node.field_s_news_teaser');
+  $storage->save();
 
   // Intro text values for news items.
   $rows = $database->select("node__body", 'n')
@@ -104,6 +113,7 @@ function stanford_news_update_8204() {
   $database->delete("node__body")
     ->condition("bundle", "stanford_news")
     ->execute();
+
   $database->delete("node_revision__body")
     ->condition("bundle", "stanford_news")
     ->execute();
@@ -116,9 +126,9 @@ function stanford_news_update_8204() {
 
   // The table data to restore after the update is completed.
   $revision_rows = $database->select("node_revision__" . $subtitle_field_name, 'n')
-                    ->fields('n')
-                    ->execute()
-                    ->fetchAll();
+                     ->fields('n')
+                     ->execute()
+                     ->fetchAll();
 
   if (!is_null($rows)) {
     foreach ($rows as $row) {
@@ -140,12 +150,7 @@ function stanford_news_update_8204() {
     }
   }
 
-
-
   // Delete the old fields.
-  $entity_type = "node";
-  $bundle = "stanford_news";
-
   $field = FieldConfig::loadByName($entity_type, $bundle, $subtitle_field_name);
   $field->delete();
 
