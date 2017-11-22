@@ -11,6 +11,8 @@ use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Utility\UpdateException;
 use Drupal\Core\Logger\RfcLogLevel;
+use Drupal\features\FeaturesManagerInterface;
+
 /**
  * Deletes old hero banner field if it's still there.
  */
@@ -63,11 +65,17 @@ function stanford_news_update_8104() {
   $summary_field_name = "field_s_news_summary";
   $entity_type = "node";
   $bundle = "stanford_news";
-
-  // Save the new field to the db.
-  $config_path = drupal_get_path('module', 'stanford_news') . '/config/install';
+  global $config_directories;
+  $config_path = $config_directories['sync'] ?? drupal_get_path('module', 'stanford_news') . "/config/install";
   $source = new FileStorage($config_path);
   $config_storage = \Drupal::service('config.storage');
+
+  // Save the summary field to the db.
+  $storage = new FieldStorageConfig($source->read("field.storage.node.field_s_news_summary"));
+  $storage->enforceIsNew()->save();
+  $config_storage->write("field.field.node.stanford_news.field_s_news_summary", $source->read("field.field.node.stanford_news.field_s_news_summary"));
+
+  // Save the teaser field to the DB.
   $storage = new FieldStorageConfig($source->read("field.storage.node.field_s_news_teaser"));
   $storage->enforceIsNew()->save();
   $config_storage->write("field.field.node.stanford_news.field_s_news_teaser", $source->read("field.field.node.stanford_news.field_s_news_teaser"));
