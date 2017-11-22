@@ -65,11 +65,12 @@ function stanford_news_update_8104() {
   $bundle = "stanford_news";
 
   // Save the new field to the db.
-  $field = \Drupal::configFactory()->getEditable('field.field.node.stanford_news.field_s_news_teaser');
-  $field->save();
-  
-  $storage = \Drupal::configFactory()->getEditable('field.storage.node.field_s_news_teaser');
-  $storage->save();
+  $config_path = drupal_get_path('module', 'stanford_news') . '/config/install';
+  $source = new FileStorage($config_path);
+  $config_storage = \Drupal::service('config.storage');
+  $storage = new FieldStorageConfig($source->read("field.storage.node.field_s_news_teaser"));
+  $storage->enforceIsNew()->save();
+  $config_storage->write("field.field.node.stanford_news.field_s_news_teaser", $source->read("field.field.node.stanford_news.field_s_news_teaser"));
 
   // Intro text values for news items.
   $rows = $database->select("node__body", 'n')
