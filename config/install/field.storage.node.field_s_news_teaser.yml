@@ -3,15 +3,13 @@ status: true
 dependencies:
   module:
     - node
-id: node.field_s_news_sub_title
-field_name: field_s_news_sub_title
+    - text
+id: node.field_s_news_teaser
+field_name: field_s_news_teaser
 entity_type: node
-type: string
-settings:
-  max_length: 255
-  is_ascii: false
-  case_sensitive: false
-module: core
+type: text_long
+settings: {  }
+module: text
 locked: false
 cardinality: 1
 translatable: true
