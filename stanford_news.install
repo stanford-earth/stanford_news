@@ -6,7 +6,11 @@
  */
 
 use Drupal\field\Entity\FieldConfig;
-
+use Drupal\Core\Config\FileStorage;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\Core\Entity\EntityStorageException;
+use Drupal\Core\Utility\UpdateException;
+use Drupal\Core\Logger\RfcLogLevel;
 /**
  * Deletes old hero banner field if it's still there.
  */
@@ -43,4 +47,111 @@ function stanford_news_update_8103() {
   }
   $manager->createConfiguration($config_to_create);
   drupal_flush_all_caches();
+}
+
+/**
+ * Change the subhead and intro fields in to one field with summary.
+ */
+function stanford_news_update_8204() {
+
+  $database = \Drupal::database();
+
+  // Migrate the text from Intro Text to Teaser Text.
+  $intro_field_name = "body";
+  $subtitle_field_name = "field_s_news_sub_title";
+  $teaser_field_name = "field_s_news_teaser";
+  $summary_field_name = "field_s_news_summary";
+
+  // Intro text values for news items.
+  $rows = $database->select("node__body", 'n')
+            ->fields('n')
+            ->condition("bundle", "stanford_news")
+            ->execute()
+            ->fetchAll();
+
+  // The table data to restore after the update is completed.
+  $revision_rows = $database->select("node_revision__body", 'n')
+                    ->fields('n')
+                    ->condition("bundle", "stanford_news")
+                    ->execute()
+                    ->fetchAll();
+
+  if (!is_null($rows)) {
+    foreach ($rows as $row) {
+      $row = (array) $row;
+      $row[$teaser_field_name . "_value"] = $row['body_value'];
+      $row[$teaser_field_name . "_format"] = $row['body_format'];
+      unset($row['body_value']);
+      unset($row['body_format']);
+      unset($row['body_summary']);
+      $database->insert("node__" . $teaser_field_name)->fields($row)->execute();
+    }
+  }
+
+  if (!is_null($revision_rows)) {
+    foreach ($revision_rows as $row) {
+      $row = (array) $row;
+      $row[$teaser_field_name . "_value"] = $row['body_value'];
+      $row[$teaser_field_name . "_format"] = $row['body_format'];
+      unset($row['body_value']);
+      unset($row['body_format']);
+      unset($row['body_summary']);
+      $database->insert("node_revision__" . $teaser_field_name)->fields($row)->execute();
+    }
+  }
+
+  // Remove the body field entries from the DB.
+  $database->delete("node__body")
+    ->condition("bundle", "stanford_news")
+    ->execute();
+  $database->delete("node_revision__body")
+    ->condition("bundle", "stanford_news")
+    ->execute();
+
+  // Subheading text values for news items.
+  $rows = $database->select("node__" . $subtitle_field_name, 'n')
+            ->fields('n')
+            ->execute()
+            ->fetchAll();
+
+  // The table data to restore after the update is completed.
+  $revision_rows = $database->select("node_revision__" . $subtitle_field_name, 'n')
+                    ->fields('n')
+                    ->execute()
+                    ->fetchAll();
+
+  if (!is_null($rows)) {
+    foreach ($rows as $row) {
+      $row = (array) $row;
+      $row[$summary_field_name . "_format"] = "content_editor";
+      $row[$summary_field_name . "_value"] = "<p>" . $row[$subtitle_field_name . "_value"] . "</p>";
+      unset($row[$subtitle_field_name . "_value"]);
+      $database->insert("node__" . $summary_field_name)->fields($row)->execute();
+    }
+  }
+
+  if (!is_null($revision_rows)) {
+    foreach ($revision_rows as $row) {
+      $row = (array) $row;
+      $row[$summary_field_name . "_format"] = "content_editor";
+      $row[$summary_field_name . "_value"] = "<p>" . $row[$subtitle_field_name . "_value"] . "</p>";
+      unset($row[$subtitle_field_name . "_value"]);
+      $database->insert("node_revision__" . $summary_field_name)->fields($row)->execute();
+    }
+  }
+
+
+
+  // Delete the old fields.
+  $entity_type = "node";
+  $bundle = "stanford_news";
+
+  $field = FieldConfig::loadByName($entity_type, $bundle, $subtitle_field_name);
+  $field->delete();
+
+  $field = FieldConfig::loadByName($entity_type, $bundle, $intro_field_name);
+  $field->delete();
+
+  field_purge_batch(250);
+
 }
