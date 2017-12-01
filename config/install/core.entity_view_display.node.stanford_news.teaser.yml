@@ -3,23 +3,23 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
-    - field.field.node.stanford_news.body
     - field.field.node.stanford_news.field_earth_matters_topic
     - field.field.node.stanford_news.field_s_news_author
     - field.field.node.stanford_news.field_s_news_category
     - field.field.node.stanford_news.field_s_news_date
+    - field.field.node.stanford_news.field_s_news_department
     - field.field.node.stanford_news.field_s_news_feat_image
     - field.field.node.stanford_news.field_s_news_masonry_style
     - field.field.node.stanford_news.field_s_news_media_contacts
     - field.field.node.stanford_news.field_s_news_rich_content
     - field.field.node.stanford_news.field_s_news_source
-    - field.field.node.stanford_news.field_s_news_sub_title
+    - field.field.node.stanford_news.field_s_news_summary
+    - field.field.node.stanford_news.field_s_news_teaser
     - field.field.node.stanford_news.field_s_news_top_media
     - field.field.node.stanford_news.panelizer
     - node.type.stanford_news
   module:
     - panelizer
-    - text
     - user
 third_party_settings:
   panelizer:
@@ -32,14 +32,6 @@ targetEntityType: node
 bundle: stanford_news
 mode: teaser
 content:
-  body:
-    label: hidden
-    type: text_summary_or_trimmed
-    weight: 101
-    settings:
-      trim_length: 600
-    third_party_settings: {  }
-    region: content
   links:
     weight: 100
     region: content
@@ -48,11 +40,13 @@ hidden:
   field_s_news_author: true
   field_s_news_category: true
   field_s_news_date: true
+  field_s_news_department: true
   field_s_news_feat_image: true
   field_s_news_masonry_style: true
   field_s_news_media_contacts: true
   field_s_news_rich_content: true
   field_s_news_source: true
-  field_s_news_sub_title: true
+  field_s_news_summary: true
+  field_s_news_teaser: true
   field_s_news_top_media: true
   panelizer: true

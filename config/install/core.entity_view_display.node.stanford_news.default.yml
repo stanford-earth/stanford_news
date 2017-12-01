@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.node.stanford_news.body
     - field.field.node.stanford_news.field_earth_matters_topic
     - field.field.node.stanford_news.field_s_news_author
     - field.field.node.stanford_news.field_s_news_category
@@ -13,44 +12,29 @@ dependencies:
     - field.field.node.stanford_news.field_s_news_media_contacts
     - field.field.node.stanford_news.field_s_news_rich_content
     - field.field.node.stanford_news.field_s_news_source
-    - field.field.node.stanford_news.field_s_news_sub_title
+    - field.field.node.stanford_news.field_s_news_summary
+    - field.field.node.stanford_news.field_s_news_teaser
     - field.field.node.stanford_news.field_s_news_top_media
     - field.field.node.stanford_news.panelizer
     - node.type.stanford_news
   module:
     - datetime
+    - ds
     - entity_reference_revisions
-    - image
+    - field_formatter_class
     - link
     - panelizer
     - text
     - user
 third_party_settings:
   panelizer:
-    enable: true
-    custom: true
+    enable: false
+    custom: false
     allow: false
     default: default
     displays:
       default:
         blocks:
-          d7aec1ef-015b-47dd-829e-f2f06cc61502:
-            id: 'entity_field:node:body'
-            label: Body
-            provider: ctools_block
-            label_display: '0'
-            formatter:
-              label: hidden
-              type: text_default
-              settings: {  }
-              third_party_settings: {  }
-              weight: 0
-              region: content
-            region: first
-            weight: 3
-            context_mapping:
-              entity: '@panelizer.entity_context:entity'
-            uuid: d7aec1ef-015b-47dd-829e-f2f06cc61502
           6078a685-1558-4932-8fdd-6693f845b3eb:
             id: 'entity_field:node:field_s_news_rich_content'
             label: 'Rich Content'
@@ -141,23 +125,6 @@ third_party_settings:
             uuid: 12c3a181-8d77-4eac-b445-8d40e2b380c2
             context_mapping:
               entity: '@panelizer.entity_context:entity'
-          9a26e52b-3242-4405-9825-ebe363ec591a:
-            id: 'entity_field:node:field_s_news_sub_title'
-            label: 'Sub Title'
-            provider: ctools_block
-            label_display: '0'
-            formatter:
-              label: hidden
-              type: string
-              settings:
-                link_to_entity: false
-              third_party_settings: {  }
-              weight: 0
-            region: first
-            weight: -3
-            uuid: 9a26e52b-3242-4405-9825-ebe363ec591a
-            context_mapping:
-              entity: '@panelizer.entity_context:entity'
           7886da27-3df0-439f-9a56-a0d8e14723e6:
             id: 'entity_field:node:field_earth_matters_topic'
             label: 'Earth Matters'
@@ -238,81 +205,95 @@ third_party_settings:
         builder: ipe
         pattern: panelizer
         static_context: {  }
+  ds:
+    layout:
+      id: layout_ibeam
+      library: stanford_layouts/ibeam
+      disable_css: false
+      entity_classes: all_classes
+      settings: {  }
+    regions:
+      hero:
+        - field_s_news_top_media
+      first:
+        - node_title
+        - field_s_news_summary
+        - field_s_news_author
+        - field_earth_matters_topic
+        - field_s_news_date
+        - field_s_news_source
+      full:
+        - field_s_news_rich_content
+        - field_s_news_media_contacts
+    fields:
+      node_title:
+        plugin_id: node_title
+        weight: 1
+        label: hidden
+        formatter: default
+        settings:
+          wrapper: h1
+          class: page-title
+          link: false
 id: node.stanford_news.default
 targetEntityType: node
 bundle: stanford_news
 mode: default
 content:
-  body:
-    label: hidden
-    type: text_default
-    weight: 101
-    settings: {  }
-    third_party_settings: {  }
-    region: content
+  field_earth_matters_topic:
+    type: entity_reference_label
+    weight: 4
+    region: first
+    label: inline
+    settings:
+      link: true
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+      ds:
+        ds_limit: ''
   field_s_news_author:
-    weight: 111
-    label: above
+    type: string
+    weight: 3
+    region: first
+    label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
-    region: content
-  field_s_news_category:
-    weight: 105
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
   field_s_news_date:
-    weight: 103
-    label: above
+    weight: 5
+    label: hidden
     settings:
-      format_type: medium
       timezone_override: ''
-    third_party_settings: {  }
-    type: datetime_default
-    region: content
-  field_s_news_department:
-    weight: 113
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    type: entity_reference_label
-    region: content
-  field_s_news_feat_image:
-    weight: 109
-    label: above
-    settings:
-      image_style: ''
-      image_link: ''
-    third_party_settings: {  }
-    type: image
-    region: content
+      date_format: 'F d, Y'
+    third_party_settings:
+      field_formatter_class:
+        class: ''
+    type: datetime_custom
+    region: first
   field_s_news_media_contacts:
     type: entity_reference_revisions_entity_view
-    weight: 112
-    label: above
+    weight: 8
+    label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    region: content
+    region: full
   field_s_news_rich_content:
     type: entity_reference_revisions_entity_view
-    weight: 107
-    label: above
+    weight: 7
+    label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    region: content
+    region: full
   field_s_news_source:
-    weight: 104
-    label: above
+    type: link
+    weight: 6
+    region: first
+    label: hidden
     settings:
       trim_length: 80
       url_only: false
@@ -320,31 +301,27 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
-    region: content
-  field_s_news_sub_title:
-    weight: 110
-    label: above
-    settings:
-      link_to_entity: false
+  field_s_news_summary:
+    type: text_default
+    weight: 2
+    region: first
+    label: hidden
+    settings: {  }
     third_party_settings: {  }
-    type: string
-    region: content
   field_s_news_top_media:
     type: entity_reference_revisions_entity_view
-    weight: 108
-    label: above
+    weight: 0
+    label: hidden
     settings:
       view_mode: default
       link: ''
     third_party_settings: {  }
-    region: content
-  links:
-    weight: 100
-    region: content
-    settings: {  }
-    third_party_settings: {  }
+    region: hero
 hidden:
-  field_earth_matters_topic: true
+  field_s_news_category: true
+  field_s_news_feat_image: true
   field_s_news_masonry_style: true
+  field_s_news_teaser: true
+  field_s_news_department: true
+  links: true
   panelizer: true
