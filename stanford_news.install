@@ -56,6 +56,8 @@ function stanford_news_update_8103() {
  */
 function stanford_news_update_8104() {
 
+  drupal_flush_all_caches();
+
   $database = \Drupal::database();
 
   // Migrate the text from Intro Text to Teaser Text.

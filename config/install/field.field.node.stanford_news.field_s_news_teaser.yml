@@ -9,7 +9,7 @@ dependencies:
     - text
 third_party_settings:
   allowed_formats:
-    content_editor: '0'
+    content_editor: content_editor
     markdown: '0'
     basic_html: '0'
     restricted_html: '0'
@@ -19,10 +19,10 @@ id: node.stanford_news.field_s_news_teaser
 field_name: field_s_news_teaser
 entity_type: node
 bundle: stanford_news
-label: 'Teaser Text'
+label: Teaser
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }
