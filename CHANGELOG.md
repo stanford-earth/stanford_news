@@ -1,5 +1,16 @@
 # Stanford News
 
+8.x-1.0-alpha5
+--------------------------------------------------------------------------------
+_Release Date: 2017-12-04_
+
+- Removed body and subtitle field and replaced with summary and teaser
+- Migration path for field changes
+- Dropped panelizer and switched to layout_plugin
+- New Department Taxonomy Field
+- Changed earth-matters hero block to tall version by default
+- Removed panels hook for h1 title
+
 8.x-1.0-alpha4
 --------------------------------------------------------------------------------
 _Release Date: 2017-11-09_
