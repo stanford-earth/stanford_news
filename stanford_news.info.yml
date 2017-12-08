@@ -15,6 +15,7 @@ dependencies:
   - image
   - link
   - menu_ui
+  - metatag
   - node
   - options
   - panelizer

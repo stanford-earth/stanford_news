@@ -15,7 +15,6 @@ dependencies:
     - field.field.node.stanford_news.field_s_news_summary
     - field.field.node.stanford_news.field_s_news_teaser
     - field.field.node.stanford_news.field_s_news_top_media
-    - field.field.node.stanford_news.panelizer
     - image.style.thumbnail
     - node.type.stanford_news
   module:
@@ -175,7 +174,7 @@ content:
       edit_mode: closed
       add_mode: dropdown
       form_display_mode: default
-      default_paragraph_type: stanford_callout_text
+      default_paragraph_type: _none
     third_party_settings: {  }
     region: content
   field_s_news_source:
@@ -238,6 +237,13 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 120
+    region: content
+    third_party_settings: {  }
   sticky:
     type: boolean_checkbox
     settings:
@@ -268,5 +274,4 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-hidden:
-  panelizer: true
+hidden: {  }

@@ -16,7 +16,6 @@ dependencies:
     - field.field.node.stanford_news.field_s_news_summary
     - field.field.node.stanford_news.field_s_news_teaser
     - field.field.node.stanford_news.field_s_news_top_media
-    - field.field.node.stanford_news.panelizer
     - node.type.stanford_news
   module:
     - panelizer
@@ -49,4 +48,3 @@ hidden:
   field_s_news_summary: true
   field_s_news_teaser: true
   field_s_news_top_media: true
-  panelizer: true
