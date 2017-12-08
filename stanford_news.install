@@ -175,7 +175,7 @@ function stanford_news_update_8104() {
 /**
  * Patch up some missing information that happened update 8104
  */
-function stanford_news_upate_8105() {
+function stanford_news_update_8105() {
   $entity_type = "node";
   $bundle = "stanford_news";
   $fields = ["field_s_news_summary", "field_s_news_teaser"];
