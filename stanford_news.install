@@ -171,3 +171,28 @@ function stanford_news_update_8104() {
   field_purge_batch(250);
 
 }
+
+/**
+ * Patch up some missing information that happened update 8104
+ */
+function stanford_news_upate_8105() {
+  $entity_type = "node";
+  $bundle = "stanford_news";
+  $fields = ["field_s_news_summary", "field_s_news_teaser"];
+
+  foreach ($fields as $field_name) {
+    $field = FieldConfig::loadByName($entity_type, $bundle, $field_name);
+    $field_keyval = \Drupal::keyValue("config.entity.key_store.field_config");
+    $field_keyval->set("uuid:" . $field->uuid(), ["field.field" . $field->id()]);
+
+    $map_keyval = \Drupal::keyValue("entity.definitions.bundle_field_map");
+    $bundle_maps = $map_keyval->get($entity_type);
+    $bundle_maps[$field_name] = [
+      'type' => 'text_long',
+      'bundles' => [
+        $bundle => $bundle,
+      ],
+    ];
+    $map_keyval->set($entity_type, $bundle_maps);
+  }
+}
