@@ -8,6 +8,7 @@ dependencies:
   - image
   - link
   - node
+  - options
   - page_manager
   - panels
   - stanford_components

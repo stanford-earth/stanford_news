@@ -252,7 +252,7 @@ display:
           click_sort_column: uri
           type: link
           settings:
-            trim_length: 80
+            trim_length: null
             url_only: true
             url_plain: false
             rel: '0'
@@ -847,6 +847,7 @@ display:
         - 'config:field.storage.node.field_s_news_feat_image'
         - 'config:field.storage.node.field_s_news_masonry_style'
         - 'config:field.storage.node.field_s_news_source'
+        - extensions
   news_list:
     display_plugin: block
     id: news_list
@@ -872,3 +873,4 @@ display:
         - 'config:field.storage.node.field_s_news_feat_image'
         - 'config:field.storage.node.field_s_news_masonry_style'
         - 'config:field.storage.node.field_s_news_source'
+        - extensions
