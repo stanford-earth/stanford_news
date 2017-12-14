@@ -1,5 +1,15 @@
 # Stanford News
 
+8.x-1.0-alpha6
+--------------------------------------------------------------------------------
+_Release Date: 2017-12-14_
+
+- Removed unused css files
+- EARTH-462: Removed callout text from default paragraph
+- EARTH-462: Removed panelizer fields lingering from last update
+- Added hook_update_8105 to patch missing field config information
+- EARTH-655: Truncated source url fixes
+
 8.x-1.0-alpha5
 --------------------------------------------------------------------------------
 _Release Date: 2017-12-04_
