@@ -2,12 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.node.body
     - field.storage.node.field_earth_matters_topic
     - field.storage.node.field_s_news_date
     - field.storage.node.field_s_news_feat_image
     - field.storage.node.field_s_news_masonry_style
     - field.storage.node.field_s_news_source
+    - field.storage.node.field_s_news_teaser
     - image.style.masonry
     - node.type.stanford_news
     - taxonomy.vocabulary.earth_matters_topics
@@ -107,10 +107,10 @@ display:
             field_s_news_source: 0
             title: 0
             field_s_news_feat_image: 0
-            body: 0
             field_earth_matters_topic: 0
             field_s_news_date: 0
             field_s_news_masonry_style: 0
+            field_s_news_teaser: 0
           separator: ''
           hide_empty: 0
           pattern: masonry_block
@@ -120,16 +120,16 @@ display:
               weight: 0
               plugin: views_row
               source: field_s_news_source
-            'views_row:title':
-              destination: title
+            'views_row:field_s_news_teaser':
+              destination: description
               weight: 1
               plugin: views_row
-              source: title
-            'views_row:body':
-              destination: description
+              source: field_s_news_teaser
+            'views_row:title':
+              destination: title
               weight: 2
               plugin: views_row
-              source: body
+              source: title
             'views_row:field_earth_matters_topic':
               destination: tags
               weight: 3
@@ -397,69 +397,6 @@ display:
           separator: ', '
           field_api_classes: false
           plugin_id: field
-        body:
-          id: body
-          table: node__body
-          field: body
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 250
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: true
-            trim: true
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: text_default
-          settings: {  }
-          group_column: value
-          group_columns:
-            format: format
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
         field_earth_matters_topic:
           id: field_earth_matters_topic
           table: node__field_earth_matters_topic
@@ -637,6 +574,68 @@ display:
           hide_alter_empty: true
           click_sort_column: value
           type: list_key
+          settings: {  }
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        field_s_news_teaser:
+          id: field_s_news_teaser
+          table: node__field_s_news_teaser
+          field: field_s_news_teaser
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: text_default
           settings: {  }
           group_column: value
           group_columns: {  }
@@ -841,12 +840,12 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_earth_matters_topic'
         - 'config:field.storage.node.field_s_news_date'
         - 'config:field.storage.node.field_s_news_feat_image'
         - 'config:field.storage.node.field_s_news_masonry_style'
         - 'config:field.storage.node.field_s_news_source'
+        - 'config:field.storage.node.field_s_news_teaser'
         - extensions
   news_list:
     display_plugin: block
@@ -867,10 +866,10 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.node.body'
         - 'config:field.storage.node.field_earth_matters_topic'
         - 'config:field.storage.node.field_s_news_date'
         - 'config:field.storage.node.field_s_news_feat_image'
         - 'config:field.storage.node.field_s_news_masonry_style'
         - 'config:field.storage.node.field_s_news_source'
+        - 'config:field.storage.node.field_s_news_teaser'
         - extensions
