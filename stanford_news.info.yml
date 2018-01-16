@@ -30,7 +30,6 @@ dependencies:
   - stanford_paragraph_section_highlight_cards
   - stanford_paragraph_slide
   - stanford_paragraph_video
-  - stanford_research_area
   - taxonomy
   - text
   - ui_patterns_views
