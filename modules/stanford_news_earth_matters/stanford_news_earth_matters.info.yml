@@ -12,7 +12,6 @@ dependencies:
   - page_manager
   - panels
   - stanford_components
-  - stanford_news
   - system
   - taxonomy
   - text
