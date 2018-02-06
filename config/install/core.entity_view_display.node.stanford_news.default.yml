@@ -7,9 +7,11 @@ dependencies:
     - field.field.node.stanford_news.field_s_news_category
     - field.field.node.stanford_news.field_s_news_date
     - field.field.node.stanford_news.field_s_news_department
+    - field.field.node.stanford_news.field_s_news_earth_tags
     - field.field.node.stanford_news.field_s_news_feat_image
     - field.field.node.stanford_news.field_s_news_masonry_style
     - field.field.node.stanford_news.field_s_news_media_contacts
+    - field.field.node.stanford_news.field_s_news_people
     - field.field.node.stanford_news.field_s_news_rich_content
     - field.field.node.stanford_news.field_s_news_source
     - field.field.node.stanford_news.field_s_news_summary
@@ -319,7 +321,9 @@ content:
 hidden:
   field_s_news_category: true
   field_s_news_department: true
+  field_s_news_earth_tags: true
   field_s_news_feat_image: true
   field_s_news_masonry_style: true
+  field_s_news_people: true
   field_s_news_teaser: true
   links: true
