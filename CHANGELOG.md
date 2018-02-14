@@ -1,5 +1,13 @@
 # Stanford News
 
+8.x-1.0-alpha9
+--------------------------------------------------------------------------------
+_Release Date: 2018-02-14_
+
+- Added field_s_news_earth_tags
+- Added field_s_news_people
+- Added field_s_news_teaser
+
 8.x-1.0-alpha8
 --------------------------------------------------------------------------------
 _Release Date: 2018-01-29_
