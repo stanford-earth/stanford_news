@@ -1,5 +1,5 @@
 # [Stanford News](https://github.com/SU-SWS/stanford_news)
-##### Version: 8.x-1.0-alpha9
+##### Version: 8.x-1.0-dev
 
 Maintainers: [jbickar](https://github.com/jbickar), [sherakama](https://github.com/sherakama)  
 
