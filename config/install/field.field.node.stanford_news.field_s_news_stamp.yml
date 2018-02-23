@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_s_news_stamp
+    - node.type.stanford_news
+  module:
+    - options
+id: node.stanford_news.field_s_news_stamp
+field_name: field_s_news_stamp
+entity_type: node
+bundle: stanford_news
+label: 'Masonry Stamp Position'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings: {  }
+field_type: list_integer

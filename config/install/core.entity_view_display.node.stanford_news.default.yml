@@ -14,6 +14,7 @@ dependencies:
     - field.field.node.stanford_news.field_s_news_people
     - field.field.node.stanford_news.field_s_news_rich_content
     - field.field.node.stanford_news.field_s_news_source
+    - field.field.node.stanford_news.field_s_news_stamp
     - field.field.node.stanford_news.field_s_news_summary
     - field.field.node.stanford_news.field_s_news_teaser
     - field.field.node.stanford_news.field_s_news_top_media
@@ -325,5 +326,6 @@ hidden:
   field_s_news_feat_image: true
   field_s_news_masonry_style: true
   field_s_news_people: true
+  field_s_news_stamp: true
   field_s_news_teaser: true
   links: true
