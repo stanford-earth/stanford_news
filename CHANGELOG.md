@@ -1,5 +1,11 @@
 # Stanford News
 
+8.x-1.0-alpha11
+--------------------------------------------------------------------------------
+_Release Date: 2018-10-03_
+
+- Fixed bug in stanford_news_earth_matters sub-module wrt upgrade to Drupal 8.6
+
 8.x-1.0-alpha10
 --------------------------------------------------------------------------------
 _Release Date: 2018-03-22_
