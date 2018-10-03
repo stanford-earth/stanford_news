@@ -39,6 +39,11 @@ class EarthMattersRoutes implements ContainerInjectionInterface {
     $routes = [];
     $num_terms = 0;
 
+    // added by ksharp 2018-10-03 to avoid bug when upgrading to Drupal 8.6.1
+    if (!db_table_exists('taxonomy_term__parent')) {
+        return $routes;
+    }
+
     $terms = $this->entityTypeManager->getStorage('taxonomy_term')
       ->loadMultiple();
 
