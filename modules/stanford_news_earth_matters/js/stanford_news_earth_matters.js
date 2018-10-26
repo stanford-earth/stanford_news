@@ -8,7 +8,7 @@
   Drupal.behaviors.EarthMatters = {
     attach: function (context, settings) {
 
-      var view = $('.earth-matters-listing.news-list');
+      var view = $('.earth-matters-listing.news-list', context);
 
       /**
        * Set the view filter value in the select.
@@ -85,6 +85,7 @@
           }
           settings.views.ajaxViews['views_dom_id:' + dom_id].view_args = args;
           $(selector).triggerHandler('RefreshView');
+          $(selector).masonry('layout');
         });
       }
 
@@ -162,6 +163,7 @@
         }
       });
     }
+
   };
 
   $(document).ajaxComplete(Drupal.behaviors.EarthMatters.setActives);
