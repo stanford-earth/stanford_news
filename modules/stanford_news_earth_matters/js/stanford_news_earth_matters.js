@@ -9,40 +9,23 @@
     attach: function (context, settings) {
 
       var view = $('.earth-matters-listing.news-list', context);
+      $(".masonry-blocks", context).masonry({});
+
+      $(context).imagesLoaded()
+        .always( function( instance) {
+          $(".masonry-blocks", context).masonry('layout');
+        })
+        .progress( function( instance ) {
+          $(".masonry-blocks", context).masonry('reloadItems');
+          $(".masonry-blocks", context).masonry('layout');
+        });
 
       /**
        * Set the view filter value in the select.
        */
       function setFilter(value, filter) {
-
-        // Uncomment the below to re-enable the multiple filter functionality.
-
-        // if ($(filter).attr('multiple')) {
-        //   var existingValues = $(filter).val();
-        //
-        //   if (existingValues) {
-        //     var i = existingValues.indexOf(value);
-        //
-        //     if (i !== -1) {
-        //       delete existingValues[i];
-        //     }
-        //     else {
-        //       existingValues.push(value);
-        //     }
-        //     value = existingValues;
-        //   }
-        //   else {
-        //     value = [value];
-        //   }
-        //
-        //   if (value.length) {
-        //     value = cleanArray(value);
-        //   }
-        // }
-
         filter.val(value);
         $(filter).trigger('change');
-
         refreshViews();
       }
 
@@ -75,7 +58,6 @@
        */
       function refreshViews() {
         var views = settings.views.ajaxViews;
-
         $.each(views, function (i, view) {
           var dom_id = view.view_dom_id;
           var selector = '.js-view-dom-id-' + dom_id;
@@ -116,20 +98,6 @@
        * Push the new url with new filters to the browser.
        */
       function setPushState(string) {
-
-        // Uncomment the below to re-enable the multiple filter functionality.
-
-        // var current_path = window.location.pathname;
-        // string = cleanString(string);
-        // if (current_path.indexOf(string) == -1) {
-        //   current_path = current_path + '/' + string;
-        // }
-        // else {
-        //   current_path = current_path.replace('/' + string, '');
-        // }
-        //
-        // history.pushState(null, null, current_path + window.location.search + window.location.hash);
-
         string = cleanString(string);
         if (string !== "all") {
           var current_path = "/earth-matters/" + string;
@@ -144,7 +112,6 @@
       $(view).find('a.filter-tab, .masonry-block__tags .tag-item').each(function () {
         setFilterClick(this, view);
       });
-
     },
 
     /**
