@@ -14,7 +14,7 @@
       $(context).imagesLoaded()
         .always( function( instance) {
           $(".masonry-blocks", context).masonry('layout');
-        }).
+        })
         .progress( function( instance ) {
           $(".masonry-blocks", context).masonry('reloadItems');
           $(".masonry-blocks", context).masonry('layout');
