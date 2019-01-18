@@ -4,6 +4,7 @@ views:
    theme:
      css/stanford_news_earth_matters.css: {}
   js:
+    js/imagesloaded.pkgd.min.js: {}
     js/stanford_news_earth_matters.js: {}
   dependencies:
     - core/jquery
