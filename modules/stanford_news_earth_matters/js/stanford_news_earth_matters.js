@@ -9,15 +9,18 @@
     attach: function (context, settings) {
 
       var view = $('.earth-matters-listing.news-list', context);
-      $(".masonry-blocks", context).masonry({});
+      var mason = $(".masonry-blocks", context).masonry({'stamp': '.stamp'});
+      var stamps = mason.find(".stamp");
 
       $(context).imagesLoaded()
         .always( function( instance) {
-          $(".masonry-blocks", context).masonry('layout');
+          mason.masonry('stamp', stamps);
+          mason.masonry('layout');
         })
         .progress( function( instance ) {
-          $(".masonry-blocks", context).masonry('reloadItems');
-          $(".masonry-blocks", context).masonry('layout');
+          mason.masonry('reloadItems');
+          mason.masonry('stamp', stamps);
+          mason.masonry('layout');
         });
 
       /**
@@ -67,6 +70,8 @@
           }
           settings.views.ajaxViews['views_dom_id:' + dom_id].view_args = args;
           $(selector).triggerHandler('RefreshView');
+          var stamps = $(selector).masonry().find('.stamp');
+          $(selector).masonry( 'stamp', stamps );
           $(selector).masonry('layout');
         });
       }
