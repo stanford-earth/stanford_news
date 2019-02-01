@@ -14,13 +14,13 @@
 
       $(context).imagesLoaded()
         .always( function( instance) {
-          mason.masonry('stamp', stamps);
-          mason.masonry('layout');
+          $(".masonry-blocks", context).masonry('stamp', stamps);
+          $(".masonry-blocks", context).masonry('layout');
         })
         .progress( function( instance ) {
-          mason.masonry('reloadItems');
-          mason.masonry('stamp', stamps);
-          mason.masonry('layout');
+          $(".masonry-blocks", context).masonry('reloadItems');
+          $(".masonry-blocks", context).masonry('stamp', stamps);
+          $(".masonry-blocks", context).masonry('layout');
         });
 
       /**
